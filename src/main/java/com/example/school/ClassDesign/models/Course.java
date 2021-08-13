@@ -27,4 +27,16 @@ public class Course {
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "courseList")
     private List<Instructor> instructorList = new ArrayList<>();
+
+    public void addStudent(Student student){
+        if(studentList == null) studentList = new ArrayList<>();
+        studentList.add(student);
+        student.getCourseList().add(this);
+    }
+
+    public void addInstructor(Instructor instructor){
+        if(instructorList == null) instructorList = new ArrayList<>();
+        instructorList.add(instructor);
+        instructor.getCourseList().add(this);
+    }
 }
